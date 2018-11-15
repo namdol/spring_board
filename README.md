@@ -1,1 +1,1 @@
-# spring_board
+# spring 프레임 워크를 사용한 게시판 프로젝트입니다.

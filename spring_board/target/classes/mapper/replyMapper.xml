@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.replyMapper">
+	<!-- 댓글 등록 : bno,replytext,replyer-->
+	<insert id="create">
+		insert into spring_reply(bno,replytext,replyer)
+		values(#{bno},#{replytext},#{replyer})
+	</insert>
+	<!-- 댓글 삭제 : rno 일치-->
+	<delete id="delete">
+		delete from spring_reply where rno=#{rno}
+	</delete>
+	<!-- 댓글 수정 : rno 일치하면 댓글내용, 업데이트 날짜 -->
+	<update id="update">
+		update spring_reply set replytext=#{replytext}, 
+		updatedate=now() where rno=#{rno}
+	</update>
+	<!-- 댓글 가져오기 : rno 일치-->
+	<select id="get" resultType="com.spring.domain.ReplyVO">
+		select * from spring_reply where rno=#{rno}
+	</select>
+	<!-- 글번호에 해당하는 전체 댓글 가져오기 : bno 일치 -->
+	<!-- <select id="list" resultType="com.spring.domain.ReplyVO">
+		select * from spring_reply where bno=#{bno}
+		order by rno desc
+	</select> -->
+	<!-- 댓글 페이지 처리 -->
+	<select id="count" resultType="int">
+		select count(bno)
+		from spring_reply
+		where bno=#{bno}
+	</select>
+	<select id="listPage" resultType="com.spring.domain.ReplyVO">
+		select * from spring_reply where bno=#{bno}
+		order by rno desc limit #{cri.pageStart},#{cri.perPageNum}
+	</select>
+	
+	<!-- 댓글 삭제시 원본글 번호 가져오기 -->
+	<select id="getBno" resultType="int">
+		select bno from spring_reply where rno=#{rno}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

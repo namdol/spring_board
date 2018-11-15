@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.attachMapper">
+	<insert id="insert">
+		insert spring_attach
+		values(#{uuid},#{uploadPath},#{fileName},#{fileType},#{bno})
+	</insert>
+	<delete id="delete">
+		delete from spring_attach where uuid=#{uuid}
+	</delete>
+	<delete id="deleteAll">
+		delete from spring_attach where bno=#{bno}
+	</delete>
+	<select id="getAttachList" resultType="com.spring.domain.BoardAttachVO">
+		select * from spring_attach where bno=#{bno}
+	</select>
+</mapper>
